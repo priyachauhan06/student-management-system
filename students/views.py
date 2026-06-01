@@ -5,8 +5,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
 
 def home(request):
     students = Student.objects.all()
@@ -57,7 +55,7 @@ def signup(request):
 
     return render(request, 'signup.html')
 
-
+#@api_view(['POST'])
 def login_view(request):
 
     if request.method == 'POST':
@@ -74,17 +72,59 @@ def login_view(request):
             login(request, user)
             return redirect('home')
 
-        return render(request, 'login.html', {
-            'error': 'Invalid Username or Password'
-        })
+        return render(request, 'login.html')
 
     return render(request, 'login.html')
 
-
-from django.contrib.auth import logout
-
+#@api_view(['POST'])
 def logout_view(request):
 
     logout(request)
 
     return redirect('login')
+
+@api_view(['POST'])
+def signup_api(request):
+
+    User.objects.create_user(
+        username=request.data.get('username'),
+        email=request.data.get('email'),
+        password=request.data.get('password')
+    )
+
+    return Response({
+        "message": "User registered successfully"
+    })
+
+
+@api_view(['POST'])
+def login_api(request):
+
+    username = request.data.get('username')
+    password = request.data.get('password')
+
+    user = authenticate(
+        username=username,
+        password=password
+    )
+
+    if user:
+        login(request, user)
+
+        return Response({
+            "message": "Login successful"
+        })
+
+    return Response({
+        "error": "Invalid username or password"
+    })
+
+
+@api_view(['POST'])
+def logout_api(request):
+
+    logout(request)
+
+    return Response({
+        "message": "Logout successful"
+    })
