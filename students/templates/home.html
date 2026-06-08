@@ -72,13 +72,13 @@
         <td>{{ student.phone }}</td>
 
         <td>
-            <a href="{% url 'edit_student' student.id %}">
+            <<a href="/edit/{{ student.id }}/">
                 Edit
             </a>
         </td>
 
         <td>
-            <a href="{% url 'delete_student' student.id %}">
+            <a href="/delete/{{ student.id }}/">
                 Delete
             </a>
         </td>
