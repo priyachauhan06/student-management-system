@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'unfold',
+    'jazzmin',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
 
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'students',
 ]
 
@@ -127,3 +128,8 @@ REST_FRAMEWORK = {
     ]
 }
 
+JAZZMIN_SETTINGS = {
+    "site_title": "Student Management",
+    "site_header": "Student Management Admin",
+    "site_brand": "Student Management",
+}
