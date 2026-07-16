@@ -44,3 +44,5 @@ class StudentAdmin(ModelAdmin):
         "fields": ("email", "phone")
     }),
 )
+    
+   

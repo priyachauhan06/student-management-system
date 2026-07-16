@@ -45,23 +45,56 @@ INSTALLED_APPS = [
     'students',
 ]
 
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+
 UNFOLD = {
-
     "SITE_TITLE": "Student Management",
-
     "SITE_HEADER": "Student Management System",
-
     "SITE_SYMBOL": "school",
 
     "SHOW_HISTORY": True,
-
     "SHOW_VIEW_ON_SITE": True,
-
     "SHOW_BACK_BUTTON": True,
 
     "DASHBOARD_CALLBACK": "students.dashboard.dashboard_callback",
-}
 
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+
+        "navigation": [
+            {
+                "title": _("Overview"),
+                "separator": True,
+                "items": [
+                    {
+                        "title": _("Dashboard"),
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
+                ],
+            },
+            {
+                "title": _("Student Management"),
+                "separator": True,
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Students"),
+                        "icon": "school",
+                        "link": reverse_lazy("admin:students_student_changelist"),
+                    },
+                    {
+                        "title": _("Add Student"),
+                        "icon": "person_add",
+                        "link": reverse_lazy("admin:students_student_add"),
+                    },
+                ],
+            },
+        ],
+    },
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
