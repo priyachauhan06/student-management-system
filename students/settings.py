@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    'unfold',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +44,23 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'students',
 ]
+
+UNFOLD = {
+
+    "SITE_TITLE": "Student Management",
+
+    "SITE_HEADER": "Student Management System",
+
+    "SITE_SYMBOL": "school",
+
+    "SHOW_HISTORY": True,
+
+    "SHOW_VIEW_ON_SITE": True,
+
+    "SHOW_BACK_BUTTON": True,
+
+    "DASHBOARD_CALLBACK": "students.dashboard.dashboard_callback",
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,8 +145,3 @@ REST_FRAMEWORK = {
     ]
 }
 
-JAZZMIN_SETTINGS = {
-    "site_title": "Student Management",
-    "site_header": "Student Management Admin",
-    "site_brand": "Student Management",
-}
